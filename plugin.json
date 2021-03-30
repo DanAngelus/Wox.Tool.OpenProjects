@@ -1,0 +1,12 @@
+{
+  "ID":"252C23B084D411DB66FE0C79D6C2A6H",
+  "ActionKeyword":"opj",
+  "Name":"Open Projects",
+  "Description":"Open the given project directory in Windows Terminal",
+  "Author":"DanAngelus",
+  "Version":"1.0.0",
+  "Language":"python",
+  "Website":"https://danangelus.uk",
+  "IcoPath": "Images\\pic.png",
+  "ExecuteFileName":"OpenProject.py"
+}
