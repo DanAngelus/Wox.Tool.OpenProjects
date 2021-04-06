@@ -18,13 +18,11 @@ class OpenProject(Wox):
         root_dir_arr = re.split('\\\\|/', self.root_dir)
         for root, dirs, files in os.walk(self.root_dir, topdown=True):
             dirs[:] = [d for d in dirs if d not in self.exclude]
-            filtered_files = [f for f in files if f.endswith('.iml')]
-            if dirs and filtered_files:
+            if '.idea' in next(os.walk(root))[1]:
                 filepath = re.split('\\\\|/', root)
-                # ToDo :: Update this to check every section of filepath
-                if not user_input or filepath[-1].startswith(user_input):
+                if not user_input or root.lower().find(user_input.lower()) > -1:
                     responses.append({
-                        'Title': f"{''.join(str(e) + ' / ' for e in [p for p in filepath if p not in root_dir_arr])}",
+                        'Title': f"{''.join(str(e) + ' / ' for e in [p for p in filepath if p not in root_dir_arr])}"[:-2],
                         'SubTitle': f'Open: {root} in IntelliJ IDEA',
                         'IcoPath': 'Images/pic.png',
                         'JsonRPCAction': {
@@ -39,6 +37,7 @@ class OpenProject(Wox):
     def action(self, project):
         # FixMe :: This doesn't work asynchronously
         Popen(["idea.cmd", project])
+        return
 
 if __name__ == '__main__':
     OpenProject()
