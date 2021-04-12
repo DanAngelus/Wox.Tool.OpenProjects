@@ -3,6 +3,7 @@ from subprocess import Popen
 import os
 import re
 import json
+import asyncio
 
 
 class OpenProject(Wox):
@@ -34,10 +35,10 @@ class OpenProject(Wox):
 
         return responses
 
+
     def action(self, project):
-        # FixMe :: This doesn't work asynchronously
-        Popen(["idea.cmd", project])
-        return
+        Popen(["idea64.exe", f"{project}"])
 
 if __name__ == '__main__':
     OpenProject()
+
